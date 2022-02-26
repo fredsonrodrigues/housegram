@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/login-style.css">
+    <title>Instagram - Login</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box">
+            <div class="heading"></div>
+            <% if(error){ %>
+                <div class="alert alert-warning" role="alert" style="color: red;">
+                    Houve um Problema ao salvar!
+                </div>
+             <% } %>
+            <form class="login-form" action="/submit/register" method="POST">
+                <div class="field">
+                    <input name="name" id="name" type="text" placeholder="password" />
+                    <label for="name">Name</label>
+                </div>
+                <div class="field">
+                    <input name="username" id="username" type="name" placeholder="Phone number, username, or email" />
+                    <label for="username">Username</label>
+                </div>
+                <div class="field">
+                    <input name="password" id="password" type="password" placeholder="password" />
+                    <label for="password">Password</label>
+                </div>
+                <!-- <div class="field">
+                    <input name="photo" id="password" type="file" placeholder="" />
+                    <label for="photo">photo</label>
+                </div> -->
+                <button type="submit" class="login-button" title="login">Sign up</button>
+                <div class="separator">
+                    <div class="line"></div>
+                </div>
+            </form>
+        </div>
+        <div class="box">
+            <p>Do you have an account? <a class="signup" href="/">Sign in</a></p>
+        </div>
+    </div>
+</body>
+
+</html>
