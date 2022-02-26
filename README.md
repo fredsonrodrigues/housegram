@@ -1,6 +1,6 @@
 # Housegram
 
-Aplicação feita em express que simula um instagram. feito para aulas dentro da Digital House.
+Aplicação feita em express que simula um instagram. Feito para aulas dentro da Digital House.
 
 ## Templates usados para o front desse projeto.
 
