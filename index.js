@@ -7,6 +7,8 @@ const estaLogado = require('./middlewares/estaLogado');
 const app = express();
 const port = 3000
 
+const EXPIRE = 300 * 1000 // tempo para expirar os cookies, em segundos, multiplicado por mil (porque estão em milisegundos)
+
 // configs -> what makes possible access body POST.
 app.use(express.urlencoded({ extended: true }));
 
@@ -16,7 +18,7 @@ app.set('view engine', 'ejs');
 app.use(cookieParser('xc bvhzksfgvbhgjbmknjlhdbfgkjfdnmklfdngjhdsbkeyboard cat', {
     httpOnly: true,
     secure: false,
-    expires: Date.now() + 300000,
+    expires: Date.now() + EXPIRE,
     maxAge: 300
 }));
 
