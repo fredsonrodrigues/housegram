@@ -2,7 +2,8 @@ const express = require('express');
 
 const loginController = express.Router();
 
-const EXPIRE = 300 // tempo para expirar os cookies, em segundos
+const EXPIRE = 300 * 1000 // tempo para expirar os cookies, em segundos, multiplicado por mil (porque estão em milisegundos)
+
 
 loginController.get('/', (req, res) => {
     res.render('pages/login', { error: false });
@@ -24,8 +25,8 @@ loginController.post('/login/submit', (req, res) => {
         return res.cookie('user_data', req.session.usuario, {
             httpOnly: true,
             signed: true,
-            maxAge: EXPIRE * 1000,
-            expires: new Date((Date.now() + (EXPIRE * 1000)))
+            maxAge: EXPIRE,
+            expires: new Date(Date.now() + EXPIRE)
         })
         .redirect('/home');
     }
