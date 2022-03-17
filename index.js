@@ -16,7 +16,7 @@ app.set('view engine', 'ejs');
 app.use(cookieParser('xc bvhzksfgvbhgjbmknjlhdbfgkjfdnmklfdngjhdsbkeyboard cat', {
     httpOnly: true,
     secure: false,
-    expires: new Date('2022-03-10T00:05:00'),
+    expires: Date.now() + 300000,
     maxAge: 300
 }));
 

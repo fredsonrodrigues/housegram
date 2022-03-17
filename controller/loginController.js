@@ -2,6 +2,8 @@ const express = require('express');
 
 const loginController = express.Router();
 
+const EXPIRE = 300 // tempo para expirar os cookies, em segundos
+
 loginController.get('/', (req, res) => {
     res.render('pages/login', { error: false });
 });
@@ -17,10 +19,17 @@ loginController.post('/login/submit', (req, res) => {
     const { username, password } = req.body
     console.log({ username, password });
     if (username === 'user1' && password === '123456') {
-        res.redirect('/home');
-    } else {
-        res.render('pages/login', { error: true });
+        req.session.usuario = { username: username, id: 1 }
+
+        return res.cookie('user_data', req.session.usuario, {
+            httpOnly: true,
+            signed: true,
+            maxAge: EXPIRE * 1000,
+            expires: new Date((Date.now() + (EXPIRE * 1000)))
+        })
+        .redirect('/home');
     }
+    return res.render('pages/login', { error: true });
 });
 
 loginController.post('/submit/register', (req, res) => {
