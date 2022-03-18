@@ -3,11 +3,13 @@ const express = require('express');
 const homeController = express.Router();
 
 homeController.get('/', (req, res) => {
-    res.render('pages/index');
+    const { nome, apelido } = req.session.usuario
+    res.render('pages/index', { nome, apelido });
 })
 
 homeController.get('/profile', (req, res) => {
-    res.render('pages/profile');
+    const { nome, apelido } = req.session.usuario
+    res.render('pages/profile', { nome, apelido });
 })
 
 module.exports = homeController;

@@ -1,4 +1,5 @@
 const express = require('express');
+const { User } = require('../models');
 
 const loginController = express.Router();
 
@@ -13,14 +14,14 @@ loginController.get('/register', (req, res) => {
     res.render('pages/register', { error: false });
 });
 
-loginController.post('/login/submit', (req, res) => {
+loginController.post('/login/submit', async (req, res) => {
     // função que vai tratar o login , verificando na base.
-    // User.where({ username: 'username', password: bycript(password) });
-    // se achar, loga o usuario dentro da sessão.
     const { username, password } = req.body
-    console.log({ username, password });
-    if (username === 'user1' && password === '123456') {
-        req.session.usuario = { username: username, id: 1 }
+    var user = await User.findOne(({
+        where: { apelido: username, senha: password }
+    }));
+    if (user) { // verificando se a query não retornará nula
+        req.session.usuario = user.toJSON()
 
         return res.cookie('user_data', req.session.usuario, {
             httpOnly: true,
