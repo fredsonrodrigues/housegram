@@ -14,6 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // set the view engine to ejs
 app.use('/', express.static('views'));
+app.use('/uploads', express.static(__dirname + '/public/images'));
 app.set('view engine', 'ejs');
 app.use(cookieParser('xc bvhzksfgvbhgjbmknjlhdbfgkjfdnmklfdngjhdsbkeyboard cat', {
     httpOnly: true,
