@@ -1,6 +1,8 @@
 const express = require('express');
 const { User } = require('../models');
 
+const jwt = require('jsonwebtoken')
+
 const loginController = express.Router();
 
 const EXPIRE = 300 * 1000 // tempo para expirar os cookies, em segundos, multiplicado por mil (porque estão em milisegundos)
@@ -23,6 +25,10 @@ loginController.post('/login/submit', async (req, res) => {
     if (user) { // verificando se a query não retornará nula
         req.session.usuario = user.toJSON()
 
+        const token = jwt.sign({data: req.session.usuario}, 'windows11', {
+            expiresIn: '30m',
+        })
+
         return res.cookie('user_data', req.session.usuario, {
             httpOnly: true,
             signed: true,
@@ -31,7 +37,7 @@ loginController.post('/login/submit', async (req, res) => {
         })
         .redirect('/home');
     }
-    return res.render('pages/login', { error: true });
+    return res.status(401).render('pages/login', { error: true });
 });
 
 loginController.post('/submit/register', (req, res) => {
