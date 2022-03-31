@@ -15,8 +15,8 @@ homeController.get('/profile', (req, res) => {
 })
 
 homeController.post('/profile', uploadMiddlware, (req, res) => {
-    const { nome, apelido } = req.session.usuario
-    res.redirect('/profile');
+    // const { nome, apelido } = req.session.usuario
+    res.json({...req.body, local_arquivo: `http://localhost:3000/uploads/${req.file.filename}`});
 })
 
 module.exports = homeController;

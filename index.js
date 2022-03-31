@@ -11,6 +11,7 @@ const EXPIRE = 300 * 1000 // tempo para expirar os cookies, em segundos, multipl
 
 // configs -> what makes possible access body POST.
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
 
 // set the view engine to ejs
 app.use('/', express.static('views'));
@@ -36,7 +37,7 @@ app.use(session({
 
 app.use('/', loginController);
 
-app.use('/home', estaLogado, homeController)
+app.use('/home', homeController)
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
